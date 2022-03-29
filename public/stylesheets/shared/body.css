@@ -1,0 +1,82 @@
+@import 'profile.css';
+
+.body-content{
+    display: flex;
+    background: black;
+    height: 500px;
+    width:100%;
+}
+
+.body-card{
+    position:relative;
+    background: yellow;
+    top: 40px;
+    height: 300px;
+    width: 25%;
+    margin: 50px;
+}
+
+.card-title{
+    position: relative;
+    bottom: 30px;
+    text-align: center;
+    font-size: 2rem;
+}
+
+.body-card img{
+    position: relative;
+    height:50%;
+    width:50%;
+    margin-left: 90px;
+    bottom: 50px;
+}
+
+.registration-content{
+    background: yellow;
+    margin: auto;
+    align-items: center;
+    width: 50%;
+    height: 90%;
+}
+
+.registration-content h1{
+    text-align: center;
+    font-size: xx-large;
+}
+
+.registration-content p{
+    text-align: center;
+}
+
+.registration-content form{
+    display:grid;
+    align-items: center;
+    justify-content: center;
+}
+
+.registration-content label{
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.registration-content input{
+    border-radius: 5px;
+    width: 200px;
+    height: 20px;
+}
+
+.registration-content input:last-child{
+    margin-top: 15px;
+    background-color: black;
+    height: 30px;
+    color: yellow;
+}
+
+.registration-content input:last-child:hover{
+    background-color: yellow;
+    color: black;
+}
+
+
+
+

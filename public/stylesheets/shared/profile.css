@@ -1,0 +1,59 @@
+.profile-part{
+    background: yellow;
+}
+
+.profile-av{
+    width: 300px;
+    height: 224px;
+    margin-left: 7px;
+    margin-top: 7px;
+}
+
+.profile-part span{
+    text-align: center;
+}
+
+.profile-link{
+     list-style: none;
+}
+
+.profile-link li{
+    font-size: 30px;
+    text-decoration: none;
+    margin-top: 10px;
+}
+
+.page-part{
+    width: 75%;
+    height: 90%;
+    background: yellow;
+    margin: auto;
+}
+
+.page-content h1{
+    font-size: 50px;
+    text-align: center;
+}
+
+.page-content form{
+    font-size: 40px;
+    text-align: center;
+}
+
+input[type=submit] {
+    width: 200px;
+    height: 50px;
+    background: black;
+    color: yellow;
+}
+
+input[type=submit]:hover{
+    background:yellow;
+    color: black;
+}
+
+.edit-content{
+    display: grid;
+    justify-content: center;
+}
+

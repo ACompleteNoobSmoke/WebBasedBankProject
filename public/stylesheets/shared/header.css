@@ -1,0 +1,26 @@
+.header-section{
+    background: yellow;
+    padding: 30px;
+    margin-bottom: 30px;
+}
+
+.header-title{
+    color:mediumturquoise;
+    font-size: xx-large;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    display: inline;
+}
+
+.header-nav ul{
+    list-style: none;
+    display: flex;
+    float: right;
+}
+
+.header-nav ul li{
+    margin-right: 30px;
+}
+
+.header-nav a{
+    text-decoration: none;
+}
