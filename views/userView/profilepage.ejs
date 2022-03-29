@@ -1,0 +1,15 @@
+<div class="body-content">
+    <div class="profile-part">
+     <%-include('sidenav', {user: user}) %>
+    </div>
+    <div class="page-part">
+        <div class="page-content registration-content edit-content">
+            <h1>Profile</h1>
+            <label for="">First Name: <span><%=user.firstName %></span></label>
+            <label for="">Last Name: <span><%=user.lastName %></span></label>
+            <label for="">Username: <span><%=user.userName %></span></label>
+            <label for="">Checking: <span>$20,000</span></label>
+            <label for="">Saving: <span>$31,000</span></label>
+        </div>
+    </div>
+</div>

@@ -1,7 +1,7 @@
-@import '../stylesheets/shared/header.css';
-@import '../stylesheets/shared/body.css';
-@import '../stylesheets/shared/footer.css';
-@import '../stylesheets/shared/profile.css';
+@import 'shared/header.css';
+@import 'shared/body.css';
+@import 'shared/footer.css';
+@import 'shared/profile.css';
 
 :root{
     height: fit-content;

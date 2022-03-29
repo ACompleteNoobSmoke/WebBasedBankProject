@@ -18,14 +18,6 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    gender: {
-        type: String,
-        required: true
-    },
-    dob: {
-        type: Date,
-        required: true
-    },
     coverImage: {
         type: Buffer,
         required: true
@@ -42,4 +34,4 @@ userSchema.virtual('coverImagePath').get(function(){
     }
 });
 
-module.exports = mongoose.model('user', userSchema);
+module.exports = mongoose.model('User', userSchema);

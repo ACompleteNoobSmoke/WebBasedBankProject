@@ -71,7 +71,7 @@ const accountRouter = require('./routes/accountrouter');
 //#endregion
 
 app.use('/', indexRouter);
-// app.use('/user', userRouter);
+app.use('/user', userRouter);
 // app.use('/account', accountRouter);
 
 
