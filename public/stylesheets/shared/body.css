@@ -31,6 +31,11 @@
     bottom: 50px;
 }
 
+.error-message{
+    color: red;
+    text-align: center;
+}
+
 .registration-content{
     background: yellow;
     margin: auto;

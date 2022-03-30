@@ -7,11 +7,14 @@ const router = express.Router();
 router.post('/logininfo', async(req, res) => {
     let userName = req.body.userName;
     let password = req.body.password;
-    const user = await BankUser.find({
-        "userName": userName,
-        "passWord": password
+    const user = await BankUser.findOne({
+        "userName": userName.toString(),
+        "passWord": password.toString()
     })
-    res.redirect(`${user.id}/profilepage`);
+    if(user != null)
+        return res.redirect(`${user.id}/profilepage`);
+
+    res.render('bankView/loginpage', {errorMessage: 'Please Enter Correct UserName & Password'});
 })
 
 router.post('/registerinfo', async(req, res) => {
@@ -54,6 +57,7 @@ async function userExists(userName){
     })
    return exists;
 }
+
 
 function saveCover(bankUser, coverEncoded){
     if(coverEncoded == null) return;

@@ -10,7 +10,7 @@ router.get('/registration', (req, res) => {
 })
 
 router.get('/login', (req, res) => {
-    res.render('bankView/loginpage');
+    res.render('bankView/loginpage', {errorMessage: ''});
 })
 
 
