@@ -6,7 +6,7 @@ router.get('/', (req, res) => {
 })
 
 router.get('/registration', (req, res) => {
-    res.render('bankView/registrationpage');
+    res.render('bankView/registrationpage', {errorMessage: ''});
 })
 
 router.get('/login', (req, res) => {

@@ -4,6 +4,8 @@ const BankAccount = require('../model/BankAccountModel');
 const imageMimeTypes = ['image/jpeg', 'image/png', 'image/gif'];
 const router = express.Router();
 
+//Route to check the login information passed
+//Finds user from Database
 router.post('/logininfo', async(req, res) => {
     let userName = req.body.userName;
     let password = req.body.password;
@@ -11,10 +13,10 @@ router.post('/logininfo', async(req, res) => {
         "userName": userName.toString(),
         "passWord": password.toString()
     })
-    if(user != null)
-        return res.redirect(`${user.id}/profilepage`);
 
-    res.render('bankView/loginpage', {errorMessage: 'Please Enter Correct UserName & Password'});
+    let redirect = (user != null) ? `${user.id}/profilepage` :'/login'
+
+    res.redirect(redirect);
 })
 
 router.post('/registerinfo', async(req, res) => {
@@ -27,11 +29,10 @@ router.post('/registerinfo', async(req, res) => {
             passWord: req.body.password,
         })
         saveCover(newBankUser, req.body.cover)
-
         const user = await newBankUser.save();
         return res.redirect(`${user.id}/profilepage`);
     } 
-    res.redirect('/');
+    res.render('bankView/registrationpage', {errorMessage: 'UserName Exists! Please Choose Another'})
 })
 
 router.get('/:id/profilepage', async (req, res) => {
