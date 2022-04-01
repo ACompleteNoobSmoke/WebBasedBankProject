@@ -26,6 +26,14 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    checking: {
+        type: Number,
+        required: true 
+    },
+    saving: {
+        type: Number,
+        required: true
+    },
 })
 
 userSchema.virtual('coverImagePath').get(function(){

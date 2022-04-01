@@ -27,12 +27,18 @@ router.post('/registerinfo', async(req, res) => {
             lastName: req.body.lastName,
             userName: req.body.userName,
             passWord: req.body.password,
+            checking: 2000,
+            saving: 2000
         })
         saveCover(newBankUser, req.body.cover)
-        const user = await newBankUser.save();
-        return res.redirect(`${user.id}/profilepage`);
+        try{
+            const user = await newBankUser.save();
+            return res.redirect(`${user.id}/profilepage`);
+        }catch{
+           return res.redirect('/registration')
+        }
     } 
-    res.render('bankView/registrationpage', {errorMessage: 'UserName Exists! Please Choose Another'})
+    res.redirect('/registration')
 })
 
 router.get('/:id/profilepage', async (req, res) => {
@@ -41,6 +47,20 @@ router.get('/:id/profilepage', async (req, res) => {
         res.render('userView/profilepage', {user: user});
     }catch{
         console.log('err')
+    }
+})
+
+router.get('/:id/deposit', async(req, res) => {
+    try{
+        const user = await BankUser.findById(req.params.id);
+        res.render('userView/transactionpage', {
+            transactionType: "DEPOSIT",
+            user: user,
+            
+        });
+        
+    }catch{
+        console.log('err');
     }
 })
 
