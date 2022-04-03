@@ -5,7 +5,7 @@
 <div class="page-part">
     <div class="page-content">
         <h1><%=transactionType %></h1>
-        <form action="user/<%=user.id %>/<%=transactionType%>" method="post">
+        <form action="/account/<%=user.id %>/<%=transactionType%>" method="post">
             <p id="current-amount-checking">Current Checking Amount: $<%=user.checking%></p>
             <p id="current-amount-saving">Current Saving Amount: $<%=user.saving%> </p>
             <label>Account</label>
@@ -15,9 +15,9 @@
             </select>
             <br><br>
             <label>Amount</label>
-            <input type="number" name="" id="">
+            <input type="number" name="transactionAmount" id="">
             <br>
-            <input type="submit" id="submit-btn" value="Submit <%=transactionType %>">
+            <input type="submit" id="submit-btn" value="SUBMIT <%=transactionType %>">
         </form>
     </div>
 </div>

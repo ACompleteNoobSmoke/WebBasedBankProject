@@ -72,7 +72,7 @@ const accountRouter = require('./routes/accountrouter');
 
 app.use('/', indexRouter);
 app.use('/user', userRouter);
-// app.use('/account', accountRouter);
+app.use('/account', accountRouter);
 
 
 app.listen(process.env.PORT);

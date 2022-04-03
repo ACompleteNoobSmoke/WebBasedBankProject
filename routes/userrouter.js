@@ -1,6 +1,5 @@
 const express = require('express');
 const BankUser = require('../model/BankUserModel');
-const BankAccount = require('../model/BankAccountModel');
 const imageMimeTypes = ['image/jpeg', 'image/png', 'image/gif'];
 const router = express.Router();
 
@@ -49,22 +48,6 @@ router.get('/:id/profilepage', async (req, res) => {
         console.log('err')
     }
 })
-
-router.get('/:id/deposit', async(req, res) => {
-    try{
-        const user = await BankUser.findById(req.params.id);
-        res.render('userView/transactionpage', {
-            transactionType: "DEPOSIT",
-            user: user,
-            
-        });
-        
-    }catch{
-        console.log('err');
-    }
-})
-
-
 
 
 /******************** Helper Methods(Start) ********************/
