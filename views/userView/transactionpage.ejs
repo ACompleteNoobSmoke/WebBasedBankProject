@@ -8,7 +8,11 @@
         <form action="/account/<%=user.id %>/<%=transactionType%>" method="post">
             <p id="current-amount-checking">Current Checking Amount: $<%=user.checking%></p>
             <p id="current-amount-saving">Current Saving Amount: $<%=user.saving%> </p>
-            <label>Account</label>
+            <% if(transactionType == 'TRANSFER'){ %>
+                <label>Transfer From</label>
+            <% } else { %>
+                <label>Account</label>
+           <% } %>
             <select name="accountType" id="accountType">
                 <option value="Checking" selected>Checking</option>
                 <option value="Saving">Saving</option>

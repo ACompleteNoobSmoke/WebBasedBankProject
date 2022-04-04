@@ -21,7 +21,9 @@ router.post('/:id/DEPOSIT', async(req, res) => {
     let user;
     try{
         user = await BankUser.findById(req.params.id);
-        depositTransaction(req, user);
+        let accountType = req.body.accountType;
+        let transactionAmount = req.body.transactionAmount;
+        depositTransaction(accountType, transactionAmount, user);
         await user.save();
         res.redirect(`/account/${user.id}/deposit`);
     }catch{
@@ -60,39 +62,75 @@ router.post('/:id/WITHDRAW', async(req, res) => {
     }
 })
 
+router.get('/:id/transfer', async (req, res) => {
+    let user;
+    try{
+        user = await BankUser.findById(req.params.id);
+        res.render('userView/transactionpage', {
+            transactionType: "TRANSFER",
+            user: user, 
+        });
+    }catch{
+        if(user == null)
+            return res.redirect('/')
+        res.redirect(`/user/${user.id}/profilepage`);
+    }
+})
+
+router.post('/:id/transfer', async(req, res) => {
+    let user;
+    try{
+        user = await BankUser.findById(req.params.id);
+        transferTransaction(req, user);
+        await user.save();
+        res.redirect(`/account/${user.id}/transfer`);
+    }catch{
+        if(user == null)
+            return res.redirect('/');
+        res.redirect(`/user/${user.id}/profilepage`);
+    }
+})
+
 
 
 /******************** Helper Methods(Start) ********************/
 
-function transactionFunds(accountType, req, user){
-    let currentAmount = ( accountType== "Checking") ? user.checking : user.saving;
-    let transactionAmount = req.body.transactionAmount;
+function transactionFunds(transactionAmount, user){
     return {
-        "currentAmount" : convertToNumber(currentAmount),
+        "checkingAmount" : convertToNumber(user.checking),
+        "savingAmount": convertToNumber(user.saving),
         "transactionAmount": convertToNumber(transactionAmount)
-    }
+    };
 }
 
-function depositTransaction(req, user){
-    let accountType = req.body.accountType;
-    let fundsObject = transactionFunds(accountType, req, user);
-    let newAmount = additionFunction(fundsObject.currentAmount, fundsObject.transactionAmount);
-    if(accountType == "Checking"){
-        user.checking = newAmount;
+function depositTransaction(accountType, transactionAmount, user){
+    let fundsObject = transactionFunds(transactionAmount, user);
+    let currentAmount = (accountType == 'Checking') ? fundsObject.checkingAmount : fundsObject.savingAmount;
+    let resultAmount = additionFunction(currentAmount, fundsObject.transactionAmount);
+    if(accountType == 'Checking'){
+        user.checking = resultAmount;
         return;
     }
-    user.saving = newAmount;   
+    user.saving = resultAmount;  
 }
 
-function withdrawTransaction(req, user){
-    let accountType = req.body.accountType;
-    let fundsObject = transactionFunds(accountType, req, user);
-    let newAmount = subtractionFunction(fundsObject.currentAmount, fundsObject.transactionAmount);
-    if(accountType == "Checking"){
-        user.checking = newAmount;
+function withdrawTransaction(accountType, transactionAmount, user){
+    let fundsObject = transactionFunds(transactionAmount, user);
+    let currentAmount = (accountType == 'Checking') ? fundsObject.checkingAmount : fundsObject.savingAmount;
+    let resultAmount = subtractionFunction(currentAmount, fundsObject.transactionAmount);
+    if(accountType == 'Checking'){
+        user.checking = resultAmount;
         return;
     }
-    user.saving = newAmount;   
+    user.saving = resultAmount
+}
+
+function transferTransaction(req, user){
+    let accountType = req.body.accountType;
+    let otherAccount = (accountType == 'Checking') ? 'Saving' : 'Checking';
+    let transactionAmount = req.body.transactionAmount;
+    withdrawTransaction(accountType, transactionAmount, user);
+    depositTransaction(otherAccount, transactionAmount, user);
 }
 
 function convertToNumber(convertThis){
