@@ -1,5 +1,6 @@
 const express = require('express');
 const BankUser = require('../model/BankUserModel');
+const imageMimeTypes = ['image/jpeg', 'image/png', 'image/gif'];
 const router = express.Router();
 
 router.get('/:id/deposit', async(req, res) => {
@@ -52,7 +53,9 @@ router.post('/:id/WITHDRAW', async(req, res) => {
     let user;
     try{
         user = await BankUser.findById(req.params.id);
-        withdrawTransaction(req, user);
+        let accountType = req.body.accountType;
+        let transactionAmount = req.body.transactionAmount;
+        withdrawTransaction(accountType, transactionAmount, user)
         await user.save();
         res.redirect(`/account/${user.id}/withdraw`);
     }catch{
@@ -91,9 +94,45 @@ router.post('/:id/transfer', async(req, res) => {
     }
 })
 
+router.get('/:id/edit', async(req, res) => {
+    let user;
+    try {
+        user = await BankUser.findById(req.params.id);
+        res.render('userView/editpage', {user:user});
+    } catch {
+        if(user == null)
+            return res.redirect('/');
+        res.redirect(`/user/${user.id}/profilepage`);
+    }
+})
+
+router.post('/:id/edit', async(req, res) => {
+    let user;
+    try {
+        user = await BankUser.findById(req.params.id);
+        let firstName = req.body.firstName;
+        let lastName = req.body.lastName;
+        let avatarCover = req.body.cover;
+        editFunction(firstName, lastName, avatarCover, user);
+    } catch {
+        if(user == null)
+            return res.redirect('/');
+        res.redirect(`/user/${user.id}/profilepage`);
+    }
+})
+
 
 
 /******************** Helper Methods(Start) ********************/
+
+function editFunction(firstName, lastName, avatarCover, user){
+    if(firstName !== '' && firstName !== user.firstName){
+        user.firstName = firstName;
+    }else if(lastName !== '' && lastName !== user.lastName){
+        user.lastName = lastName;
+    }
+    saveCover(user, avatarCover);
+}
 
 function transactionFunds(transactionAmount, user){
     return {
@@ -128,9 +167,12 @@ function withdrawTransaction(accountType, transactionAmount, user){
 function transferTransaction(req, user){
     let accountType = req.body.accountType;
     let otherAccount = (accountType == 'Checking') ? 'Saving' : 'Checking';
+    let currentAmount = (accountType == 'Checking') ? user.checking : user.saving;
     let transactionAmount = req.body.transactionAmount;
-    withdrawTransaction(accountType, transactionAmount, user);
-    depositTransaction(otherAccount, transactionAmount, user);
+    if(transactionAmount <= currentAmount){
+      withdrawTransaction(accountType, transactionAmount, user);
+      depositTransaction(otherAccount, transactionAmount, user);  
+    } 
 }
 
 function convertToNumber(convertThis){
