@@ -3,14 +3,14 @@
 }
 
 .profile-av{
-    width: 300px;
+    width: 290px;
     height: 224px;
-    margin-left: 7px;
-    margin-top: 7px;
 }
 
-.profile-part span{
-    text-align: center;
+.usernameplacement{
+    font-size: 22px;
+    display: table;
+    margin: 0 auto;
 }
 
 .profile-link{
