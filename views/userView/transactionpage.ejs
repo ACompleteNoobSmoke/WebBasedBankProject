@@ -4,7 +4,7 @@
     </div>
 <div class="page-part">
     <div class="page-content">
-        <h1 id="transactionType"><%=transactionType %></h1>
+        <h1 class="page-header" id="transactionType"><%=transactionType %></h1>
         <form action="/account/<%=user.id %>/<%=transactionType%>" method="post">
             <p id="current-amount-checking">Current Checking Amount: $<%=user.checking%></p>
             <p id="current-amount-saving">Current Saving Amount: $<%=user.saving%> </p>
