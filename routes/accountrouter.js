@@ -114,6 +114,8 @@ router.post('/:id/edit', async(req, res) => {
         let lastName = req.body.lastName;
         let avatarCover = req.body.cover;
         editFunction(firstName, lastName, avatarCover, user);
+        await user.save();
+        res.redirect(`/account/${user.id}/edit`);
     } catch {
         if(user == null)
             return res.redirect('/');
@@ -128,10 +130,22 @@ router.post('/:id/edit', async(req, res) => {
 function editFunction(firstName, lastName, avatarCover, user){
     if(firstName !== '' && firstName !== user.firstName){
         user.firstName = firstName;
-    }else if(lastName !== '' && lastName !== user.lastName){
+    }
+    if(lastName !== '' && lastName !== user.lastName){
         user.lastName = lastName;
     }
-    saveCover(user, avatarCover);
+    if(avatarCover != null && avatarCover != ''){
+        saveCover(user, avatarCover);
+    }
+}
+
+function saveCover(bankUser, coverEncoded){
+    if(coverEncoded == null) return;
+    const cover = JSON.parse(coverEncoded)
+    if(cover != null && imageMimeTypes.includes(cover.type)){
+        bankUser.coverImage = new Buffer.from(cover.data, 'base64')
+        bankUser.coverImageType = cover.type
+    }
 }
 
 function transactionFunds(transactionAmount, user){
