@@ -18,6 +18,8 @@ router.post('/logininfo', async(req, res) => {
     res.redirect(redirect);
 })
 
+
+//Route to register the user information
 router.post('/registerinfo', async(req, res) => {
     const exists = await userExists(req.body.userName)
     if(!exists){
@@ -40,6 +42,7 @@ router.post('/registerinfo', async(req, res) => {
     res.redirect('/registration')
 })
 
+//Route to the user profile page
 router.get('/:id/profilepage', async (req, res) => {
     try{
         const user = await BankUser.findById(req.params.id);
