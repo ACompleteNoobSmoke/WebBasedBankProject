@@ -3,6 +3,8 @@ const BankUser = require('../model/BankUserModel');
 const imageMimeTypes = ['image/jpeg', 'image/png', 'image/gif'];
 const router = express.Router();
 
+//********** Deposit Functionality (Start) **********//
+
 router.get('/:id/deposit', async(req, res) => {
     let user;
     try{
@@ -33,6 +35,10 @@ router.post('/:id/DEPOSIT', async(req, res) => {
         res.redirect(`/user/${user.id}/profilepage`);
     }
 })
+
+//********** Deposit Functionality (End) **********//
+
+//********** Withdraw Functionality (Start) **********//
 
 router.get('/:id/withdraw', async(req, res) => {
     let user;
@@ -65,6 +71,10 @@ router.post('/:id/WITHDRAW', async(req, res) => {
     }
 })
 
+//********** Withdraw Functionality (End) **********//
+
+//********** Transfer Functionality (Start) **********//
+
 router.get('/:id/transfer', async (req, res) => {
     let user;
     try{
@@ -94,6 +104,12 @@ router.post('/:id/transfer', async(req, res) => {
     }
 })
 
+//********** Transfer Functionality (End) **********//
+
+
+
+//********** Edit User Information Functionality (Start) **********//
+
 router.get('/:id/edit', async(req, res) => {
     let user;
     try {
@@ -122,6 +138,8 @@ router.post('/:id/edit', async(req, res) => {
         res.redirect(`/user/${user.id}/profilepage`);
     }
 })
+
+//********** Edit User Information Functionality (End) **********//
 
 
 
