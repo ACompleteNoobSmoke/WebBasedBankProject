@@ -1,12 +1,12 @@
 
-        <a href="/user/<%=user.id %>/profilepage"><img class="profile-av" src="<%=user.coverImagePath %>" alt="Avatar"></a>
+        <a href="/api/v1/user/<%=user.id %>/profilepage"><img class="profile-av" src="<%=user.coverImagePath %>" alt="Avatar"></a>
         <br>
         <span class="usernameplacement"><%=user.userName %></span>
         <ul class="profile-link">
-            <li><a href="/account/<%=user.id %>/deposit"><i class="fa-solid fa-money-bill-trend-up"> Deposit</i></a></li>
-            <li><a href="/account/<%=user.id %>/withdraw"><i class="fa-solid fa-hand-holding-dollar"> Withdraw</i></a></li>
-            <li><a href="/account/<%=user.id %>/transfer"><i class="fa-solid fa-money-bill-transfer"> Transfer</i></a></li>
-            <li><a href="/account/<%=user.id %>/edit"><i class="fa-solid fa-gears"> Edit</i></a></li>
-            <li><a href="/"><i class="fa-solid fa-right-from-bracket"> Logout</i></a></li>
+            <li><a href="/api/v1/account/<%=user.id %>/deposit"><i class="fa-solid fa-money-bill-trend-up"> Deposit</i></a></li>
+            <li><a href="/api/v1/account/<%=user.id %>/withdraw"><i class="fa-solid fa-hand-holding-dollar"> Withdraw</i></a></li>
+            <li><a href="/api/v1/account/<%=user.id %>/transfer"><i class="fa-solid fa-money-bill-transfer"> Transfer</i></a></li>
+            <li><a href="/api/v1/account/<%=user.id %>/edit"><i class="fa-solid fa-gears"> Edit</i></a></li>
+            <li><a href="/api/v1/"><i class="fa-solid fa-right-from-bracket"> Logout</i></a></li>
         </ul>
    
