@@ -28,7 +28,7 @@ const methodOverride = require('method-override');
 
 
 
-//#region ********** DATABASE RESOURCES **********/
+//#region *********** DATABASE RESOURCES ***********/
 mongoose.set("strictQuery", false);
 
  mongoose.connect(process.env.DATABASE_URL, {
