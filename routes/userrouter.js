@@ -21,6 +21,7 @@ router.post('/logininfo', async(req, res) => {
 
 //Route to register the user information
 router.post('/registerinfo', async(req, res) => {
+    console.log(req.body);
     const exists = await userExists(req.body.userName)
     if(!exists){
         const newBankUser = new BankUser({
