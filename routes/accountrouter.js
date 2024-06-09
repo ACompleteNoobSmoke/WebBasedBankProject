@@ -16,7 +16,7 @@ router.get('/:id/deposit', async(req, res) => {
     }catch{
         if(user == null)
            return res.redirect('/');
-        res.redirect(`/user/${user.id}/profilepage`);
+        res.redirect(`/api/v1/user/${user.id}/profilepage`);
     }
 })
 
@@ -28,11 +28,11 @@ router.post('/:id/DEPOSIT', async(req, res) => {
         let transactionAmount = req.body.transactionAmount;
         depositTransaction(accountType, transactionAmount, user);
         await user.save();
-        res.redirect(`/account/${user.id}/deposit`);
+        res.redirect(`/api/v1/account/${user.id}/deposit`);
     }catch{
         if(user == null)
-            return res.redirect('/');
-        res.redirect(`/user/${user.id}/profilepage`);
+            return res.redirect('/api/v1/');
+        res.redirect(`/api/v1/user/${user.id}/profilepage`);
     }
 })
 
@@ -50,8 +50,8 @@ router.get('/:id/withdraw', async(req, res) => {
         });
     }catch{
         if(user == null)
-            return res.redirect('/');
-        res.redirect(`/user/${user.id}/profilepage`);
+            return res.redirect('/api/v1/');
+        res.redirect(`/api/v1/user/${user.id}/profilepage`);
     }
 })
 
@@ -63,11 +63,11 @@ router.post('/:id/WITHDRAW', async(req, res) => {
         let transactionAmount = req.body.transactionAmount;
         withdrawTransaction(accountType, transactionAmount, user)
         await user.save();
-        res.redirect(`/account/${user.id}/withdraw`);
+        res.redirect(`/api/v1/account/${user.id}/withdraw`);
     }catch{
         if(user == null)
             return res.redirect('/');
-        res.redirect(`/user/${user.id}/profilepage`);
+        res.redirect(`/api/v1/user/${user.id}/profilepage`);
     }
 })
 
@@ -85,8 +85,8 @@ router.get('/:id/transfer', async (req, res) => {
         });
     }catch{
         if(user == null)
-            return res.redirect('/')
-        res.redirect(`/user/${user.id}/profilepage`);
+            return res.redirect('/api/v1/')
+        res.redirect(`/api/v1/user/${user.id}/profilepage`);
     }
 })
 
@@ -96,11 +96,11 @@ router.post('/:id/transfer', async(req, res) => {
         user = await BankUser.findById(req.params.id);
         transferTransaction(req, user);
         await user.save();
-        res.redirect(`/account/${user.id}/transfer`);
+        res.redirect(`/api/v1/account/${user.id}/transfer`);
     }catch{
         if(user == null)
-            return res.redirect('/');
-        res.redirect(`/user/${user.id}/profilepage`);
+            return res.redirect('/api/v1/');
+        res.redirect(`/api/v1/user/${user.id}/profilepage`);
     }
 })
 
@@ -118,7 +118,7 @@ router.get('/:id/edit', async(req, res) => {
     } catch {
         if(user == null)
             return res.redirect('/');
-        res.redirect(`/user/${user.id}/profilepage`);
+        res.redirect(`/api/v1/user/${user.id}/profilepage`);
     }
 })
 
@@ -131,11 +131,11 @@ router.post('/:id/edit', async(req, res) => {
         let avatarCover = req.body.cover;
         editFunction(firstName, lastName, avatarCover, user);
         await user.save();
-        res.redirect(`/account/${user.id}/edit`);
+        res.redirect(`/api/v1/account/${user.id}/edit`);
     } catch {
         if(user == null)
-            return res.redirect('/');
-        res.redirect(`/user/${user.id}/profilepage`);
+            return res.redirect('/api/v1/');
+        res.redirect(`/api/v1/user/${user.id}/profilepage`);
     }
 })
 

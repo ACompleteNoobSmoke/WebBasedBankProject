@@ -13,7 +13,7 @@ router.post('/logininfo', async(req, res) => {
         "passWord": password.toString()
     })
 
-    let redirect = (user != null) ? `${user.id}/profilepage` :'/login'
+    let redirect = (user != null) ? `/api/v1/${user.id}/profilepage` :'/api/v1/login'
 
     res.redirect(redirect);
 })
@@ -34,12 +34,12 @@ router.post('/registerinfo', async(req, res) => {
         saveCover(newBankUser, req.body.cover)
         try{
             const user = await newBankUser.save();
-            return res.redirect(`${user.id}/profilepage`);
+            return res.redirect(`/api/v1/${user.id}/profilepage`);
         }catch{
-           return res.redirect('/registration')
+           return res.redirect('/api/v1/registration')
         }
     } 
-    res.redirect('/registration')
+    res.redirect('/api/v1/registration')
 })
 
 //Route to the user profile page
