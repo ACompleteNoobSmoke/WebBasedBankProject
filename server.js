@@ -71,9 +71,9 @@ const accountRouter = require('./routes/accountrouter');
 
 //#endregion
 
-app.use('/', indexRouter);
-app.use('/user', userRouter);
-app.use('/account', accountRouter);
+app.use('api/v1/', indexRouter);
+app.use('api/v1/user', userRouter);
+app.use('api/v1/account', accountRouter);
 
 
 app.listen(process.env.PORT);
