@@ -76,4 +76,6 @@ app.use('/api/v1/user', userRouter);
 app.use('/api/v1/account', accountRouter);
 
 
-app.listen(process.env.PORT);
+app.listen(process.env.PORT, () => {
+    console.log(process.env.PORT)
+});
